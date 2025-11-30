@@ -101,7 +101,7 @@ export const seed:SeedData = {
             fecha_update:'',
             active:true,
             destacado:false,
-            inCarrusel:false
+            inCarrusel:true
         }
     ]
 }

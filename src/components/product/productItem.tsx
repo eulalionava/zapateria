@@ -18,7 +18,7 @@ export const ProductItem = ({product}:Props)=>{
             className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition"
         >
             <div className="h-30 flex items-center justify-center bg-gray-200 rounded-lg mb-4">
-                <a href="productos">
+                <a href={`productos/${product.id}`}>
                     <span className="text-gray-500">
                         <Image src={`/images/${product.images[0]}`} className="w-full h-full" alt="Nike Air Force Shoe" width={150} height={150} />
                     </span>
