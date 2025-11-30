@@ -1,5 +1,5 @@
 
-import { seed } from '@/seed/seed'
+import { seed } from '@/src/seed/seed'
 import { ProductItem } from "./productItem";
 
 export const ProductList = () =>{

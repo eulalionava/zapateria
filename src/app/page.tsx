@@ -1,9 +1,9 @@
 
 
 
-import Menu from "@/components/menu";
-import { ProductList } from "@/components/product/productList";
-import SectionWraper from "@/components/sectionWraper";
+import Menu from "@/src/components/menu";
+import { ProductList } from "@/src/components/product/productList";
+import SectionWraper from "@/src/components/sectionWraper";
 
 export default function Home() {
 

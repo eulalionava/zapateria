@@ -35,10 +35,7 @@ export const seed:SeedData = {
             name:"Tenis Air for",
             description: "Tenis Nike Air Force para niña, con diseño clásico y comodidad excepcional.",
             images: [
-                'tenis_basquet-1.png',
-                'tenis_basquet_2.png',
-                'jordan_morado_1.png',
-                'jordan_verde_claro.png'
+                'Tenis_gris_preview.png'
             ],
             inStock: 7,
             priceFabric:200,
@@ -61,10 +58,8 @@ export const seed:SeedData = {
             name:"Tenis Air for",
             description: "Tenis Nike Air Force para niña, con diseño clásico y comodidad excepcional.",
             images: [
-                'tenis_basquet_2.png',
-                'tenis_basquet-1.png',
-                'jordan_morado_1.png',
-                'jordan_verde_claro.png'
+                'cupra_blanco.png',
+                'cupra_blanco_2.png'
             ],
             inStock: 7,
             priceFabric:200,
