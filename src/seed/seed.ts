@@ -1,7 +1,7 @@
 export interface SeedProduct {
     id:number
     name:string,
-    description: "Tenis Nike Air Force para niña, con diseño clásico y comodidad excepcional.",
+    description: string
     images: string[],
     inStock: number,
     priceFabric:number
@@ -22,6 +22,8 @@ export interface SeedProduct {
 
 interface SeedData {
     categories:string[]
+    genders:string[]
+    sizes:string[]
     products: SeedProduct[],
 }
 
@@ -29,6 +31,8 @@ export const seed:SeedData = {
     categories:[
         'running','futbool','basquetbool','casual','botas','tenis','zapatillas'
     ],
+    genders:['men','woman','boy','girl','unisex'],
+    sizes:['15','16','17','18','22','23','24','25','26','27','28'],
     products:[
         {
             id:1,
@@ -79,22 +83,22 @@ export const seed:SeedData = {
         },
         {
             id:3,
-            name:"Tenis Air for",
-            description: "Tenis Nike Air Force para niña, con diseño clásico y comodidad excepcional.",
+            name:"Zapatos De Baloncesto",
+            description: "Jóvenes Zapatos De Baloncesto Profesional Con Suela De Goma",
             images: [
                 'jordan_morado_1.png',
-                'tenis_basquet-1.png',
-                'tenis_basquet_2.png',
-                'jordan_verde_claro.png'
+                'zapatos_morado_2.png',
+                'zapatos_morado_3.png',
+                'zapatos_morado_4.png'
             ],
             inStock: 7,
-            priceFabric:200,
-            price: 200,
-            sizes: ['24','25','26'],
+            priceFabric:660,
+            price: 890,
+            sizes: ['24'],
             marca: "nike",
             gender:'girl',
             category:'basquetbool',
-            color:'Negro con blanco',
+            color:'Morado con blanco',
             inPromo:false,
             descuento:0,
             fecha_creacion:'',

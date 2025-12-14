@@ -32,20 +32,24 @@ export default function Menu() {
 
             {/* <!-- Mobile Menu --> */}
             <div id="mobileMenu" className="md:hidden hidden bg-white shadow p-4 space-y-4">
-                <div className="flex items-center justify-between bg-gray-100 px-2 rounded-md text-gray-700">
+                <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                     <a className="block">Niño</a>
                     <IoChevronForwardSharp />
                 </div>
-                <div className="flex items-center justify-between bg-gray-100 px-2 rounded-md text-gray-700">
+                <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                     <a className="block">Niña</a>
                     <IoChevronForwardSharp />
                 </div>
-                <div className="flex items-center justify-between bg-gray-100 px-2 rounded-md text-gray-700">
+                <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                     <a className="block">Mujer</a>
                     <IoChevronForwardSharp />
                 </div>
-                <div className="flex items-center justify-between bg-gray-100 px-2 rounded-md text-gray-700">
+                <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                     <a className="block">Hombre</a>
+                    <IoChevronForwardSharp />
+                </div>
+                <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                    <a className="block">Login</a>
                     <IoChevronForwardSharp />
                 </div>
             </div>
