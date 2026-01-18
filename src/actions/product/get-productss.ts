@@ -1,4 +1,4 @@
-import { seed } from '@/src/seed/seed'
+
 import { api } from '../api';
 
 export const getProducts = async()=>{

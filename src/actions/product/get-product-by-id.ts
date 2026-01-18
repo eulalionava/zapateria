@@ -1,14 +1,13 @@
 import { seed } from '@/src/seed/seed'
+import { api } from '../api';
 
-export const getProductById = async(id:number)=>{
+export const getProductById = async(id:string)=>{
     try {
-        const producto = await seed.products.find(item=>item.id == id);
+        const response = await api.get(`/products/${id}`);
 
-        if(!producto) return null
+        if(!response) return null
 
-        return {
-            producto
-        }
+        return response.data.producto
         
     } catch (error) {
         throw new Error('No se encontro el producto')
