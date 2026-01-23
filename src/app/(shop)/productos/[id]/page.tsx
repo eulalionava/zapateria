@@ -20,7 +20,6 @@ export  default async function ProductPage({params}:{params:Promise<{id:string}>
     <div>
         <section className="relative bg-gradient-to-r from-teal-300 to-red-300 py-5 px-5 rounded-b-3xl shadow-md">
             <div className="flex flex-col justify-center items-center">
-              <small className="text-black">{producto.name}</small>
               <h1 className="font-bold text-black text-xl">{producto.marca}</h1>
             </div>
 

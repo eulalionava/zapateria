@@ -25,7 +25,7 @@ export const ProductItem = ({product}:Props)=>{
                     </span>
                 </a>
             </div>
-            <h2 className="font-bold text-md text-black">{product.name}</h2>
+            <h2 className="font-bold text-md text-black">{(product.name).substring(0, 10)}...</h2>
             <p className="text-gray-500">${product.price}</p>
             <div className="flex items-center justify-center gap-2 bg-gray-500 p-1 rounded-md text-[12px]">
                 <a href={`productos/${product.id}`}>
