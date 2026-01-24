@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div className="bg-gray-100 font-sans">
-      <Menu/>
+      {/* <Menu/> */}
 
       <SectionWraper/>
 

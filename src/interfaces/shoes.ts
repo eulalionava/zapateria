@@ -3,6 +3,8 @@ export interface Size{
     id:string
     name:string
     active:boolean
+    createdAt:Date
+    updatedAt:Date
 }
 
 export interface Gender {
@@ -32,3 +34,44 @@ export interface Producto {
     activepromotion: string;
     descuento?: number;
 } 
+
+export interface GetProduct {
+    id:          string;
+    name:        string;
+    images:      Image[];
+    inStock:     string;
+    priceFabric: string;
+    price:       string;
+    sizes:       string;
+    marca:       string;
+    gender:      Gender;
+    category:    Category;
+    color:       string;
+    inPromocion: boolean;
+    descuento:   string;
+    destacado:   boolean;
+    inCarrusel:  boolean;
+    active:      boolean;
+    createdAt:   Date;
+    updatedAt:   Date;
+}
+
+export interface Category {
+    id:       string;
+    name:      string;
+    active:    boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface Gender {
+    id:       string;
+    name:      string;
+    active:    boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+interface Image {
+    url: string;
+}

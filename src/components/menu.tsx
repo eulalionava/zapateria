@@ -20,6 +20,7 @@ export default function Menu() {
                     <li className="text-gray-600 hover:text-black cursor-pointer">Niño</li>
                     <li className="text-gray-600 hover:text-black cursor-pointer">Mujer</li>
                     <li className="text-gray-600 hover:text-black cursor-pointer">Hombre</li>
+                    <li className="text-gray-600 hover:text-black cursor-pointer">Unisex</li>
                 </ul>
 
 
@@ -49,9 +50,13 @@ export default function Menu() {
                     <IoChevronForwardSharp />
                 </div>
                 <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
-                    <a className="block">Login</a>
+                    <a className="block">Unisex</a>
                     <IoChevronForwardSharp />
                 </div>
+                {/* <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                    <a className="block">Login</a>
+                    <IoChevronForwardSharp />
+                </div> */}
             </div>
         </>
     )

@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -10,8 +12,21 @@ import 'swiper/css/navigation'
 import { motion } from "motion/react"
 
 import { seed } from '@/src/seed/seed'
+import { GetProduct } from "../interfaces";
+import { getProducts } from "../actions";
 
 export default function SectionWraper() {
+    const [products, setProducts] = useState<GetProduct[]>([]);
+    
+    useEffect(()=>{
+        const getLoadedProducts = async()=>{
+            const resp = await getProducts();
+            console.log(resp)
+            setProducts(resp)
+        }
+        getLoadedProducts();
+    },[])
+
     return (
         <>
             <motion.section
@@ -29,12 +44,12 @@ export default function SectionWraper() {
                         className="mySwiper flex"
                     >
                         {
-                            seed.products.map(product => product.inCarrusel == true && (
+                            products.map(product => product.inCarrusel == true && (
                                 <SwiperSlide key={product.id}>
                                     <div className="flex justify-center">
                                         <div className="w-80 h-80 bg-white/30 backdrop-blur-lg rounded-3xl flex items-center justify-center">
                                             <span className="text-white text-xl">
-                                                <Image src={`/images/${product.images[0]}`} className="w-full h-full" alt="Nike Neon Shoe" width={300} height={300} />
+                                                <img src={`${product.images[0]}`} className="w-full h-full" alt="Nike Neon Shoe" width={300} height={300} />
                                             </span>
                                         </div>
                                     </div>

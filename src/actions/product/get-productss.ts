@@ -1,14 +1,14 @@
 
 import { api } from '../api';
 
-export const getSizes = async()=>{
+export const getProducts = async()=>{
     try {
         
-        const response = await api.get('/sizes');
+        const response = await api.get('/products');
 
         if(!response) return null
 
-        return response.data.sizes
+        return response.data.productos
         
     } catch (error) {
         throw new Error('No se encontraron las tallas')

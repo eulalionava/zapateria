@@ -67,8 +67,6 @@ export default function NewProductPage(){
 
         setIsLoading(false)
         window.location.reload();
-
-       
     }
 
     
