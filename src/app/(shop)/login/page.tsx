@@ -22,7 +22,7 @@ export default function LoginPage(){
       return
     }
 
-    redirect('/')
+    redirect('/newproduct')
 
   }
 

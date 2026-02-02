@@ -1,12 +1,20 @@
 'use client';
 
 import { IoChevronForwardSharp } from "react-icons/io5";
+import { useUserStore } from "../store";
+import { useRouter } from "next/navigation";
 
 export default function Menu() {
-    
+    const router = useRouter()
+    const { isLogin,desactiveLogin } = useUserStore();
+
     const showOnMobile = () => {
         const mobileMenu = document.getElementById("mobileMenu");
         mobileMenu?.classList.toggle("hidden");
+    }
+
+    const CloseSesion = () => {
+        desactiveLogin();
     }
 
     return (
@@ -53,10 +61,26 @@ export default function Menu() {
                     <a className="block">Unisex</a>
                     <IoChevronForwardSharp />
                 </div>
-                {/* <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
-                    <a className="block">Login</a>
-                    <IoChevronForwardSharp />
-                </div> */}
+                
+                {!isLogin && (
+                    <a href="/login" className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                        <small className="text-sm">Login</small>
+                        <IoChevronForwardSharp />
+                    </a>
+                )}        
+
+                {isLogin && (
+                    <>
+                        <div onClick={()=>router.push("/newproduct")} className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                            <small className="text-sm">Nuevo Producto</small>
+                            <IoChevronForwardSharp />
+                        </div>
+                        <div className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                            <a className="block" onClick={CloseSesion}>Cerrar sesion</a>
+                            <IoChevronForwardSharp />
+                        </div>
+                    </>
+                )}
             </div>
         </>
     )
