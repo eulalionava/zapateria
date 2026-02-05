@@ -71,6 +71,10 @@ export default function Menu() {
 
                 {isLogin && (
                     <>
+                        <div onClick={()=>router.push("/admin")} className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                            <small className="text-sm">Admin</small>
+                            <IoChevronForwardSharp />
+                        </div>
                         <div onClick={()=>router.push("/newproduct")} className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                             <small className="text-sm">Nuevo Producto</small>
                             <IoChevronForwardSharp />
