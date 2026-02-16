@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import Swal from 'sweetalert2'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import { IoArrowBackCircle } from "react-icons/io5";
@@ -20,7 +20,7 @@ export default function FormNewProduct(){
     const { isLogin } = useUserStore();
     
     const [isLoading,setIsLoading] = useState(false);
-    const {register,handleSubmit,formState:{errors}} = useForm<Producto>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<Producto>();
     const [inDescuento,setInDescuento] = useState(false);
 
     const [sizes,setSizes] = useState<Size[]>([]);
@@ -29,8 +29,11 @@ export default function FormNewProduct(){
 
     // Imagenes seleccionadas (vistas previas)
     const [previews, setPreviews] = useState<string[]>([]);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // guardar referencia al input de archivos para poder limpiarlo después
+        fileInputRef.current = e.target;
         const files = e.target.files;
         if (!files) return;
         // revocar URLs previas para evitar leaks
@@ -71,14 +74,26 @@ export default function FormNewProduct(){
         discount === 'true' ? setInDescuento(true) : setInDescuento(false)
     }
 
-    const onSubmit = async(data:Producto)=>{
+    const onSubmit = async (data: Producto) => {
         setIsLoading(true);
+        try {
+            const resp = await createNewProduct(data);
+            await Swal.fire(resp.message, '', 'success');
 
-        const resp = await createNewProduct(data)
-        await Swal.fire(resp.message, '', 'success');
-
-        setIsLoading(false)
-        window.location.reload();
+            // revoke preview URLs and clear previews
+            previews.forEach(url => URL.revokeObjectURL(url));
+            setPreviews([]);
+            // clear file input value
+            if (fileInputRef.current) fileInputRef.current.value = '';
+            // reset form fields managed by react-hook-form
+            reset();
+            setInDescuento(false);
+        } catch (error) {
+            console.error(error);
+            await Swal.fire('Error', 'No se pudo crear el producto', 'error');
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     
