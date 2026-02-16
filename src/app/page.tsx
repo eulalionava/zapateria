@@ -4,6 +4,7 @@
 import Menu from "@/src/components/menu";
 import { ProductList } from "@/src/components/product/productList";
 import SectionWraper from "@/src/components/sectionWraper";
+import { FilterGender } from "@/src/components/filterGender";
 
 export default function Home() {
 
@@ -12,8 +13,11 @@ export default function Home() {
       <Menu/>
 
       <SectionWraper/>
-
-      <ProductList/>
+      
+      <div>
+        <FilterGender/>
+        <ProductList/>
+      </div>
       
     </div>
 

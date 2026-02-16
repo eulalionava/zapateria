@@ -46,6 +46,7 @@ export interface GetProduct {
     marca:       string;
     gender:      Gender;
     category:    Category;
+    code:        string;
     color:       string;
     inPromocion: boolean;
     descuento:   string;

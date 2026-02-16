@@ -21,7 +21,6 @@ export default function SectionWraper() {
     useEffect(()=>{
         const getLoadedProducts = async()=>{
             const resp = await getProducts();
-            console.log(resp)
             setProducts(resp)
         }
         getLoadedProducts();
