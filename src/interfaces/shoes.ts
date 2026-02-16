@@ -46,6 +46,7 @@ export interface GetProduct {
     marca:       string;
     gender:      Gender;
     category:    Category;
+    code:        string;
     color:       string;
     inPromocion: boolean;
     descuento:   string;
@@ -70,6 +71,22 @@ export interface Gender {
     active:    boolean;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface User {
+    name:         string;
+    username:     string;
+    phone:        string;
+    direction:    string;
+    email:        string;
+    authProvider: string;
+    createdAt:    Date;
+    updatedAt:    Date;
+}
+
+export interface GetLoginUser {
+    user:User;
+    token:string;
 }
 
 interface Image {

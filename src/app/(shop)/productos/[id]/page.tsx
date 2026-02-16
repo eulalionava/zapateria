@@ -1,7 +1,5 @@
 
 
-
-
 import clsx from "clsx";
 
 import { seed } from '@/src/seed/seed'

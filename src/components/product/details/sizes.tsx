@@ -26,6 +26,7 @@ export const SizesPage = ({product}:Props) => {
         <motion.div initial={{opacity:0}} whileInView={{opacity:1}} transition={{duration:1.4}}>
             <div>
                 <h1 className="mt-3 text-[30px] font-bold text-gray-700">{product.name}</h1>
+                <h1 className="text-[18px] text-gray-400">Code:{product.code}</h1>
                 <h1 className="text-[18px] text-gray-500">{product.color}</h1>
                 <h1 className="my-3 text-[30px] font-bold text-gray-700">${product?.price}</h1>
                 <h1 className="text-gray-600 text-md font-bold py-1">Numeros disponibles</h1>
