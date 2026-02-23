@@ -49,6 +49,14 @@ export default function LoginPage(){
               className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-md transition-colors duration-300" 
               value="Iniciar Sesión"
               type="submit"/>
+
+            <button 
+              className="w-full bg-red-400 hover:bg- text-white font-bold py-2 px-4 rounded-md transition-colors duration-300"
+              onClick={()=>redirect('/')} 
+              type="button">
+                Regresar a la tienda
+            </button>
+
         </form>
     </div>
   )
