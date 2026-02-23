@@ -31,6 +31,10 @@ export default function Menu() {
 
             {/* <!-- Mobile Menu --> */}
             <div id="mobileMenu" className="md:hidden hidden bg-white shadow p-4 space-y-4">
+                <a href="/" className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
+                    <small className="text-sm">Inicio</small>
+                    <IoChevronForwardSharp />
+                </a>
                 {!isLogin && (
                     <a href="/login" className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md text-gray-700">
                         <small className="text-sm">Iniciar sesión</small>
