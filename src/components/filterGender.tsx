@@ -60,17 +60,28 @@ export const FilterGender = () => {
                         }
                     )
             }>Niña</div>
-                <div 
-                    onClick={() => OnSelect('boy')}
-                    className={
-                        clsx(
-                            "text-center rounded-md w-[100px] p-1",
-                            { 
-                                'bg-amber-600 text-white': filterForGender === 'boy',
-                                'bg-white text-gray-300': filterForGender !== 'boy'
-                            }
-                        )
-                }>Niño</div>
+            <div 
+                onClick={() => OnSelect('boy')}
+                className={
+                    clsx(
+                        "text-center rounded-md w-[100px] p-1",
+                        { 
+                            'bg-amber-600 text-white': filterForGender === 'boy',
+                            'bg-white text-gray-300': filterForGender !== 'boy'
+                        }
+                    )
+            }>Niño</div>
+            <div 
+                onClick={() => OnSelect('unisex')}
+                className={
+                    clsx(
+                        "text-center rounded-md w-[100px] p-1",
+                        { 
+                            'bg-amber-600 text-white': filterForGender === 'unisex',
+                            'bg-white text-gray-300': filterForGender !== 'unisex'
+                        }
+                    )
+            }>Unisex</div>
         </section>
     )
 }
