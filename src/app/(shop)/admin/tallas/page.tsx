@@ -4,10 +4,12 @@ import { getGenders, getTotalSizeByGender } from '@/src/actions';
 import { Gender, Producto } from '@/src/interfaces';
 import { useForm } from 'react-hook-form';
 import { IoArrowBackCircle } from "react-icons/io5";
+import { SpinnerLoading } from '@/src/components/SpinnerLoading';
 
 export default function TallasPage(){
   const [genders,setGenders] = useState<Gender[]>([]);
   const [totalSizes, setTotalSizes] = useState<Record<string, number>>({});
+  const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Producto>();
 
@@ -21,10 +23,12 @@ export default function TallasPage(){
 
   const onSubmit = async(genero:string) => {
     setTotalSizes({})
+    setLoading(true);
     const resp = await getTotalSizeByGender(genero)
 
     if(Object.keys(resp).length === 0){
       setTotalSizes({})
+      setLoading(false);
       return
     }
 
@@ -34,6 +38,7 @@ export default function TallasPage(){
         [key]: resp[key],
       }));
     }
+    setLoading(false);
   }
 
   return (
@@ -52,21 +57,30 @@ export default function TallasPage(){
                   <option value={gender.id} key={gender.id}>{gender.name}</option>
               ))}
           </select>
-          <div>
-            {Object.keys(totalSizes).length > 0 ? (
-              <div className='flex flex-wrap gap-2 p-2'>
-                {Object.keys(totalSizes).map((size) => (
-                  <div key={size} 
-                    className='flex flex-col items-center justify-between text-md bold text-white text-xl rounded-md bg-black w-[90px] h-[100px] shadow-2xl p-3'>
-                    <h1 className="text-[28px] font-bold">{size} </h1>
-                    <h2 className="bg-green-400 rounded-full text-gray-500 font-bold shadow-2xl p-2">{totalSizes[size]}</h2>
-                  </div>
-                ))}
-              </div>
-            ):(
-              <p className='text-md font-bold text-white text-xl rounded-md bg-amber-700 p-2 m-2'>No se encontraron tallas para el genero seleccionado</p>
-            )}
-          </div>
+          { 
+          loading ? (
+            <div className='text-md font-bold text-white text-xl rounded-m p-2 m-2'>
+              <SpinnerLoading size={50} color='white'/>
+            </div>
+          )
+          :(
+            <div>
+              {Object.keys(totalSizes).length > 0 ? (
+                <div className='flex flex-wrap gap-2 p-2'>
+                  {Object.keys(totalSizes).map((size) => (
+                    <div key={size} 
+                      className='flex flex-col items-center justify-between text-md bold text-white text-xl rounded-md bg-black w-[90px] h-[100px] shadow-2xl p-3'>
+                      <h1 className="text-[28px] font-bold">{size} </h1>
+                      <h2 className="bg-green-400 rounded-full text-gray-500 font-bold shadow-2xl p-2">{totalSizes[size]}</h2>
+                    </div>
+                  ))}
+                </div>
+              ):(
+                <p className='text-md font-bold text-white text-xl rounded-md bg-amber-700 p-2 m-2'>No se encontraron tallas para el genero seleccionado</p>
+              )}
+            </div>
+          )
+          }
         </form>
       </section>
     </div>
