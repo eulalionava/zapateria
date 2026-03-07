@@ -20,6 +20,7 @@ export default function TallasPage(){
   },[]);
 
   const onSubmit = async(genero:string) => {
+    setTotalSizes({})
     const resp = await getTotalSizeByGender(genero)
 
     if(Object.keys(resp).length === 0){
