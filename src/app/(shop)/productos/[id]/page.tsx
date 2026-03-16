@@ -1,11 +1,8 @@
 
-
-import clsx from "clsx";
-
-import { seed } from '@/src/seed/seed'
 import { VisualShoe } from "@/src/components/product/details/visualShoe";
 import { getProductById } from "@/src/actions";
 import { SizesPage } from "@/src/components/product/details/sizes";
+import { Buttons } from "../ui/Buttons";
 
 
 
@@ -13,6 +10,7 @@ export  default async function ProductPage({params}:{params:Promise<{id:string}>
   const { id } = await params;
 
   const producto = await getProductById(id);
+
 
   return (
     <div>
@@ -25,10 +23,8 @@ export  default async function ProductPage({params}:{params:Promise<{id:string}>
 
             <SizesPage product={producto}/>
             
-            <div className="flex justify-center">
-              <a href="/">
-                <button className="bg-amber-600 rounded-sm p-2 my-4">Regresar</button>
-              </a>
+            <div className="flex justify-center gap-2">
+              <Buttons/>
             </div>
         </section>
     </div>

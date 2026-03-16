@@ -4,6 +4,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const cards = [
   { href: '/admin/venta', title: 'Venta de producto', desc: 'Realizar compra de un producto',bg:'bg-orange-200' },
+  { href: '/newproduct', title: 'Nuevo producto', desc: 'Registrar un nuevo producto',bg:'bg-gray-200' },
   { href: '/admin/ventas', title: 'Todas las ventas', desc: 'Ver el historial de compras',bg:'bg-blue-200' },
   { href: '/admin/inventarios', title: 'Inventarios', desc: 'Inversión y ganancias',bg:'bg-green-200' },
   { href: '/admin/promociones', title: 'Lanzamiento promoción', desc: 'Crear y lanzar promociones',bg:'bg-purple-200' },

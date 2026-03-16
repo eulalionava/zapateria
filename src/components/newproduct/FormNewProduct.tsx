@@ -42,12 +42,16 @@ export default function FormNewProduct(){
             return Array.from(files).map(file => URL.createObjectURL(file));
         });
     }
-
     useEffect(()=>{
-        if (!isLogin) {
-            router.push('/login')
-        }
+        const timer = setTimeout(() => {
+            if (!isLogin) {
+                router.push('/login')
+            }
+        }, 3000);
+
+        return () => clearTimeout(timer);
     },[isLogin]);
+
     // limpiar URLs al desmontar
     useEffect(() => {
         return () => {
