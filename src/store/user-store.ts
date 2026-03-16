@@ -15,7 +15,7 @@ export const useUserStore =create<State>()(
         (set,get)=>({
             user:{} as GetLoginUser,
             isLogin:false,
-            
+
             activeLogin:() => set({isLogin:true}),
             desactiveLogin:()=> set({isLogin:false}),
             userLoged:(user:GetLoginUser) => set({user:user}),
