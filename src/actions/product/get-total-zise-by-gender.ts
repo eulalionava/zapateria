@@ -1,8 +1,8 @@
 import { api } from "../api"
 
-export const getTotalSizeByGender = async(gender:string)=>{
+export const getTotalSizeByGender = async(gender:string, category = '')=>{
     try {
-        const { data } = await api.get(`/products/total-by-size/${gender}`)   
+        const { data } = await api.post(`/products/total-by-size`,{ gender, category })   
 
         if(data.status !== 200){
             return []
