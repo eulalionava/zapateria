@@ -1,14 +1,19 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import { getGenders, getTotalSizeByGender } from '@/src/actions';
-import { Gender, Producto } from '@/src/interfaces';
+import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
+
+import { getCategories, getGenders, getTotalSizeByGender } from '@/src/actions';
+import { Category, Gender, Producto } from '@/src/interfaces';
 import { useForm } from 'react-hook-form';
 import { IoArrowBackCircle } from "react-icons/io5";
 import { SpinnerLoading } from '@/src/components/SpinnerLoading';
 
 export default function TallasPage(){
   const [genders,setGenders] = useState<Gender[]>([]);
+  const [categories,setCategories] = useState<Category[]>([]);
   const [totalSizes, setTotalSizes] = useState<Record<string, number>>({});
+  const [category,setCategory] = useState('');
+  const [gender,setGender] = useState('');
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Producto>();
@@ -16,15 +21,20 @@ export default function TallasPage(){
   useEffect(()=>{
     const getActions = async()=>{
         const getGendersResponse = await getGenders();
+        const getCategoriesResponse = await getCategories();
         setGenders(getGendersResponse);
+        setCategories(getCategoriesResponse);
     }
     getActions();  
   },[]);
 
-  const onSubmit = async(genero:string) => {
+  const onSubmit = async() => {
+    if(gender === '') return Swal.fire('Busqueda invalida','Seleciona el genero como minimo filtro de tu busqueda','error');
+
     setTotalSizes({})
     setLoading(true);
-    const resp = await getTotalSizeByGender(genero)
+    const resp = await getTotalSizeByGender(gender,category)
+
 
     if(Object.keys(resp).length === 0){
       setTotalSizes({})
@@ -49,14 +59,27 @@ export default function TallasPage(){
       </div>
       <section>
         <form 
-          className='w-full h-10 max-w-sm mx-auto bg-white rounded-md shadow-md'
+          className='w-full h-10 max-w-sm mx-auto'
         >
-          <select className="w-full h-full font-bold text-sm text-black" onChange={(e)=>onSubmit(e.target.value)}>
+          <select className="w-full h-full font-bold text-sm text-black bg-white rounded-md shadow-md mb-2" onChange={(e)=>setGender(e.target.value)}>
               <option value="">Seleccion el genero</option>
               {genders.map((gender:Gender)=>(
                   <option value={gender.id} key={gender.id}>{gender.name}</option>
               ))}
           </select>
+
+          <select className="w-full h-full font-bold text-sm text-black bg-white rounded-md shadow-md mb-2" onChange={(e)=>setCategory(e.target.value)}>
+              <option value="">Seleccion la categoria</option>
+              {categories.map((category:Category)=>(
+                  <option value={category.id} key={category.id}>{category.name}</option>
+              ))}
+          </select>
+          <input 
+            type="submit" 
+            value="Buscar" 
+            className='w-full h-full font-bold text-sm text-white bg-black cursor-pointer rounded-md'
+            onClick={handleSubmit(onSubmit)}
+          />
           { 
           loading ? (
             <div className='text-md font-bold text-white text-xl rounded-m p-2 m-2'>
