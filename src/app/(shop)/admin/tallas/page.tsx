@@ -35,7 +35,6 @@ export default function TallasPage(){
     setLoading(true);
     const resp = await getTotalSizeByGender(gender,category)
 
-
     if(Object.keys(resp).length === 0){
       setTotalSizes({})
       setLoading(false);
