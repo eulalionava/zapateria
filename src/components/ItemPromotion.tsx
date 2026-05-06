@@ -2,7 +2,7 @@
 
 export default function ItemPromotion() {
   return (
-    <div className="relative w-[350px] h-[350px] bg-orange-500 overflow-hidden rounded-lg shadow-lg">
+    <div className="relative w-full h-[350px] bg-orange-500 overflow-hidden rounded-lg shadow-lg">
           
           <img 
             src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519" 
