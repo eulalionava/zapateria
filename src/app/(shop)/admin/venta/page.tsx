@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
+import { number } from "motion";
 
 export default function VentaPage(){
 
@@ -17,8 +18,10 @@ export default function VentaPage(){
   const [product,setProduct] = useState<GetProduct>()
   const [ collectionSizes,setCollectionSizes ] = useState<Size[]>([]);
   const [ selectSize,setSelectSize ] = useState('');
+  const [ descuento,setDescuento ] = useState<boolean>(false);
+  const [ porcentaje,setPorcentaje ] = useState<number>(0);
 
-  const handleSubmitForm = async(data: any) => {
+  const handleSearchProduct = async(data: any) => {
       const response = await getProductoByCode(data.code)
       if(response.status)  return  Swal.fire(response.message, '', 'error')
 
@@ -59,7 +62,7 @@ export default function VentaPage(){
         <IoChevronBackCircleSharp size={30}/>Regresar
       </button>
 
-      <form onSubmit={ handleSubmit(handleSubmitForm) }>
+      <form onSubmit={ handleSubmit(handleSearchProduct) }>
         <div className='flex flex-col items-center justify-center gap-2 pt-5'>
           <input 
             type='text' 
@@ -118,8 +121,8 @@ export default function VentaPage(){
               {/* Opciones */}
               <div className="space-y-6">
                 {/* Talla */}
-                <div>
-                  <h3 className="font-semibold text-lg mb-3">Tallas disponibles</h3>
+                <div className="m-0">
+                  <h3 className="font-semibold text-lg text-black mb-3">Tallas disponibles</h3>
                   <div className="flex gap-3 flex-wrap">
                     {collectionSizes.map((size, i) => (
                       <button
@@ -133,6 +136,41 @@ export default function VentaPage(){
                     ))}
                   </div>
                 </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg text-black mb-3">Con descuento</h3>
+                  <div className="flex justify-between">
+                      <div className="flex-1 flex gap-4">
+                          <label className="text-md text-black">Si</label>
+                          <input 
+                              className="w-6 h-6" 
+                              type="radio" 
+                              name="descuento"
+                              onChange={()=>setDescuento(true)}
+                          />
+                      </div>
+                      <div className="flex-1 flex gap-4">
+                          <label className="text-md text-black">No</label>
+                          <input 
+                              className="w-6 h-6" 
+                              type="radio"  
+                              name="descuento"
+                              onChange={()=>setDescuento(false)}
+                          />
+                      </div>
+                  </div>
+                </div>
+
+                { descuento && (
+                  <div>
+                    <input 
+                      type="number" 
+                      placeholder="Descuento en porcentaje"
+                      className="w-full bg-gray-200 text-black rounded-xl px-4 py-2"
+                      onChange={(e)=>setPorcentaje(Number(e.target.value))}
+                    />
+                  </div>)
+                }
 
                 {/* Botones */}
                 <div className="flex gap-4">
