@@ -1,10 +1,12 @@
 import { api } from "../api"
 
-export const createSeleProduct = async(idProduct:string,talla:string)=>{
+export const createSeleProduct = async(idProduct:string,datos:any)=>{
     try {
         const { data } = await api.post(`/ventas`,{
             producto:idProduct,
-            talla
+            talla: datos.size,
+            activeDescuento: datos.discount,
+            porcentajeDescuento: datos.percentaje
         })   
 
         if(data.status !== 200){
@@ -15,6 +17,6 @@ export const createSeleProduct = async(idProduct:string,talla:string)=>{
 
     } catch (error) {
 
-        throw new Error('No se encontro el producto')
+        throw new Error('Error al crear la venta del producto')
     }
 }

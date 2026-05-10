@@ -7,19 +7,21 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
-import { number } from "motion";
+import { number, percent } from "motion";
+import { SpinnerLoading } from "@/src/components/SpinnerLoading";
 
 export default function VentaPage(){
 
   const router =useRouter()
   const { register, handleSubmit, formState: { errors }, reset } = useForm<GetProduct>();
 
+  const [loading,setLoading] = useState(false);
   const [productFind,setProductFind] = useState(false)
   const [product,setProduct] = useState<GetProduct>()
   const [ collectionSizes,setCollectionSizes ] = useState<Size[]>([]);
   const [ selectSize,setSelectSize ] = useState('');
-  const [ descuento,setDescuento ] = useState<boolean>(false);
-  const [ porcentaje,setPorcentaje ] = useState<number>(0);
+  const [ activeDiscount,setActiveDiscount ] = useState<boolean>(false);
+  const [ percentaje,setPercentaje ] = useState<number>(0);
 
   const handleSearchProduct = async(data: any) => {
       const response = await getProductoByCode(data.code)
@@ -37,18 +39,33 @@ export default function VentaPage(){
 
     if(!selectSize) return Swal.fire('Debes seleccionar la talla del calzado a vender', '', 'warning')
     
+    if(activeDiscount && percentaje == 0) return Swal.fire('Debes ingresar el porcentaje de descuento', '', 'warning')
+    
+    if(percentaje < 0 || percentaje > 100) return Swal.fire('El porcentaje de descuento debe ser entre 0 y 100', '', 'warning')
+
+    setLoading(true)
+    
     if(collectionSizes.length > 1){
-      await updateSizeProduct(selectSize, product?.id || '')
+      await updateSizeProduct(product?.id || '', selectSize)
+      setActiveDiscount(false)
+      setPercentaje(0)
     }else{
       await deleteProduct(product?.id || '')
     }
-
+    
     const sizeName = collectionSizes.filter(size=>size.id === selectSize)[0].name
+    
+    const getData = {
+      size: sizeName,
+      discount: activeDiscount,
+      percentaje: Number(percentaje)
+    }
 
-    const response = await createSeleProduct(product?.id || '',sizeName)
+    const response = await createSeleProduct(product?.id || '', getData)
+
 
     Swal.fire(response, '', 'success')
-
+    setLoading(false)
     setProductFind(false)
     setSelectSize('')
   }
@@ -146,7 +163,7 @@ export default function VentaPage(){
                               className="w-6 h-6" 
                               type="radio" 
                               name="descuento"
-                              onChange={()=>setDescuento(true)}
+                              onChange={()=>setActiveDiscount(true)}
                           />
                       </div>
                       <div className="flex-1 flex gap-4">
@@ -155,19 +172,19 @@ export default function VentaPage(){
                               className="w-6 h-6" 
                               type="radio"  
                               name="descuento"
-                              onChange={()=>setDescuento(false)}
+                              onChange={()=>{setActiveDiscount(false),setPercentaje(0)}}
                           />
                       </div>
                   </div>
                 </div>
 
-                { descuento && (
+                { activeDiscount && (
                   <div>
                     <input 
                       type="number" 
                       placeholder="Descuento en porcentaje"
                       className="w-full bg-gray-200 text-black rounded-xl px-4 py-2"
-                      onChange={(e)=>setPorcentaje(Number(e.target.value))}
+                      onChange={(e)=>setPercentaje(Number(e.target.value))}
                     />
                   </div>)
                 }
@@ -184,7 +201,9 @@ export default function VentaPage(){
                     className="flex-1 bg-blue-600 text-white rounded-xl py-3 font-semibold hover:bg-blue-700"
                     onClick={handlSale}
                   >
-                    Venta
+                    {loading ?(
+                      <SpinnerLoading size={30} color="#fff"/>
+                    ):'Venta'}
                   </button>
                 </div>
               </div>
