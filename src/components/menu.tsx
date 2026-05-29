@@ -17,7 +17,7 @@ export default function Menu() {
     }
 
     return (
-        <>
+        <div className="fixed top-0 w-full z-10">
             <nav className="w-full bg-[#0e7675] shadow p-4 flex justify-between items-center">
                 <div className="text-xl font-bold">Tenis Nava</div>
 
@@ -54,6 +54,6 @@ export default function Menu() {
                     </>
                 )}
             </div>
-        </>
+        </div>
     )
 }

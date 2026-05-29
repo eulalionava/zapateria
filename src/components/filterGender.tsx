@@ -25,12 +25,12 @@ export const FilterGender = () => {
 
     return (
         <>
-            <section className="flex gap-2 flex-wrap p-3">
+            <section className="flex gap-2 flex-wrap w-full justify-between md:justify-start p-3">
                 <div 
                     onClick={() => OnSelect('all')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'all',
                                 'bg-white text-gray-300': filterForGender !== 'all'
@@ -41,7 +41,7 @@ export const FilterGender = () => {
                     onClick={() => OnSelect('men')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'men',
                                 'bg-white text-gray-300': filterForGender !== 'men'
@@ -52,7 +52,7 @@ export const FilterGender = () => {
                     onClick={() => OnSelect('woman')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'woman',
                                 'bg-white text-gray-300': filterForGender !== 'woman'
@@ -63,7 +63,7 @@ export const FilterGender = () => {
                     onClick={() => OnSelect('girl')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'girl',
                                 'bg-white text-gray-300': filterForGender !== 'girl'
@@ -74,7 +74,7 @@ export const FilterGender = () => {
                     onClick={() => OnSelect('boy')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'boy',
                                 'bg-white text-gray-300': filterForGender !== 'boy'
@@ -85,7 +85,7 @@ export const FilterGender = () => {
                     onClick={() => OnSelect('unisex')}
                     className={
                         clsx(
-                            "text-center rounded-md w-[100px] p-1",
+                            "text-center rounded-md w-[47%] md:w-[100px] p-1",
                             { 
                                 'bg-amber-600 text-white': filterForGender === 'unisex',
                                 'bg-white text-gray-300': filterForGender !== 'unisex'
