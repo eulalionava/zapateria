@@ -92,3 +92,12 @@ export interface GetLoginUser {
 interface Image {
     url: string;
 }
+
+export interface Cardpoint {
+    id: string;
+    numero: string;
+    puntos: number;
+    nombrecompleto?: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
