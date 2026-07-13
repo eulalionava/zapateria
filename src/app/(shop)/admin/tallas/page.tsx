@@ -7,6 +7,7 @@ import { Category, Gender, Producto } from '@/src/interfaces';
 import { useForm } from 'react-hook-form';
 import { IoArrowBackCircle } from "react-icons/io5";
 import { SpinnerLoading } from '@/src/components/SpinnerLoading';
+import { ModalProductosBySize } from '@/src/modals/ModalProductosBySize';
 
 export default function TallasPage(){
   const [genders,setGenders] = useState<Gender[]>([]);
@@ -15,6 +16,8 @@ export default function TallasPage(){
   const [category,setCategory] = useState('');
   const [gender,setGender] = useState('');
   const [loading, setLoading] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
+  const [selectedSize, setSelectedSize] = useState('');
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Producto>();
 
@@ -34,6 +37,7 @@ export default function TallasPage(){
     setTotalSizes({})
     setLoading(true);
     const resp = await getTotalSizeByGender(gender,category)
+    console.log('resp',resp)
 
     if(Object.keys(resp).length === 0){
       setTotalSizes({})
@@ -50,7 +54,15 @@ export default function TallasPage(){
     setLoading(false);
   }
 
+  const onHandleSizeClick  = (size: string) => {
+    setSelectedSize(size);
+    setActiveModal(true);
+  }
+
   return (
+    <>
+    {activeModal && <ModalProductosBySize desactivar={()=>setActiveModal(false)} gender={gender} category={category} size={selectedSize} />}
+
     <div className='bg-gradient-to-r from-teal-300 to-red-300 min-h-screen p-1'>
       <div className="flex items-center mb-4">
         <IoArrowBackCircle size={30} color='black'/>
@@ -90,8 +102,11 @@ export default function TallasPage(){
               {Object.keys(totalSizes).length > 0 ? (
                 <div className='flex flex-wrap gap-2 p-2'>
                   {Object.keys(totalSizes).map((size) => (
-                    <div key={size} 
-                      className='flex flex-col items-center justify-between text-md bold text-white text-xl rounded-md bg-black w-[90px] h-[100px] shadow-2xl p-3'>
+                    <div
+                      key={size}
+                      onClick={() => onHandleSizeClick(size)}
+                      className='flex flex-col items-center justify-between text-md bold text-white text-xl rounded-md bg-black w-[90px] h-[100px] shadow-2xl p-3 cursor-pointer hover:scale-105 transition-transform'
+                    >
                       <h1 className="text-[28px] font-bold">{size} </h1>
                       <h2 className="bg-green-400 rounded-full text-gray-500 font-bold shadow-2xl p-2">{totalSizes[size]}</h2>
                     </div>
@@ -106,5 +121,6 @@ export default function TallasPage(){
         </form>
       </section>
     </div>
+    </>
   )
 }

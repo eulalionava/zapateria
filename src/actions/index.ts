@@ -10,6 +10,7 @@ export { getProductoByCode } from './product/get-producto-by-code'
 export { updateSizeProduct } from './product/update-size-product'
 export { deleteProduct } from './product/delete-product'
 export { getTotalSizeByGender } from './product/get-total-zise-by-gender'
+export { getProductosBySize } from './product/get-product-by-size'
 
 export { getColectionSizes } from './sizes/get-collect-sizes'
 
