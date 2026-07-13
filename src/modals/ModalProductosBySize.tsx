@@ -41,7 +41,7 @@ export const ModalProductosBySize = ({desactivar,gender,category,size}:Props) =>
 
     return(
         <Modal desactivar={desactivar}>
-            <div className="p-6 pt-10 overflow-y-auto" >
+            <div className="p-6 overflow-y-auto max-h-[70vh]">
                 <h2 className="text-xl font-bold text-black mb-4 text-center">
                     Productos talla {selectedSize}
                 </h2>
