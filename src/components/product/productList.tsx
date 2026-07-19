@@ -12,6 +12,7 @@ import { useProductStore } from '@/src/store';
 
 export const ProductList = () =>{
     const [products, setProducts] = useState<GetProduct[]>([]);
+    const [productsTemp, setProductsTemp] = useState<GetProduct[]>([]);
 
     const{ filterGender } = useProductStore(state=>state)
 
@@ -19,22 +20,26 @@ export const ProductList = () =>{
         const getLoadedProducts = async()=>{
             const resp = await getProducts();
 
-            if(filterGender == 'all'){
-                setProducts(resp)
-            }else{
-                const filtedproducts = resp.filter((product:GetProduct) => product.gender.name === filterGender);
-                setProducts(filtedproducts)
-            }
-            
+            setProducts(resp)
+            setProductsTemp(resp)
         }
         getLoadedProducts();
 
-    },[filterGender])
+    },[])
+
+    useEffect(()=>{
+        if(filterGender == 'all'){
+            setProductsTemp(products)
+        }else{
+            const filtedproducts = products.filter((product:GetProduct) => product.gender.name === filterGender);
+            setProductsTemp(filtedproducts)
+        }
+    },[filterGender]);
 
     return (
         <>
             <section className="max-w-6xl mx-auto p-4 grid grid-cols-2 md:grid-cols-3 gap-6">
-                { products.map(product=>(
+                { productsTemp.map(product=>(
                     <ProductItem key={product.id} product={product}/>
                 ))}                
             </section>
