@@ -1,55 +1,70 @@
-import Link from 'next/link'
-import React from 'react'
 
-export default function VentasPage(){
+import { getSales } from "@/src/actions";
+import Image from "next/image";
+
+export default async function VentasPage() {
+  const response = await getSales();
+
+  const sales = response ?? [];
+
   return (
-    <div className="bg-gradient-to-r from-teal-300 to-red-300 shadow-md min-h-screen p-4">
-      {/* Card */}
-      <div className="flex items-center gap-4 bg-white rounded-2xl shadow-md p-4">
-        {/* Icon */}
-        <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-red-50 text-red-500">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 6h18M4 6l1 14h14l1-14M9 6V4h6v2"
-            />
-          </svg>
-        </div>
+    <div className="min-h-screen bg-gradient-to-r from-teal-300 to-red-300 p-6">
+      <h1 className="text-3xl font-bold text-white mb-6">
+        Ventas
+      </h1>
 
-        {/* Content */}
-        <div className="flex-1">
-          <h3 className="font-semibold text-gray-800">Lorem ipsum</h3>
-          <p className="text-sm text-gray-400">
-            Consectetur adipiscing elit
-          </p>
-
-          {/* Rating */}
-          <div className="flex items-center text-yellow-400 text-sm mt-1">
-            ★★★★☆
+      <div className="grid gap-4">
+        {sales.length === 0 ? (
+          <div className="bg-white rounded-xl p-6 text-center shadow">
+            No existen ventas.
           </div>
+        ) : (
+          sales.map((sale: any) => (
+            <div
+              key={sale.id}
+              className="flex items-center justify-between bg-white rounded-2xl shadow-md p-5"
+            >
+              <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-red-100">
+                  🛍️
+                </div>
 
-          {/* Price */}
-          <p className="font-bold text-gray-800 mt-1">$165.99</p>
-        </div>
+                <div>
+                  <h2 className="text-lg font-bold">
+                    producto
+                  </h2>
 
-        {/* Actions */}
-        <div className="flex flex-col items-end gap-2">
-          <button className="text-red-400 hover:text-red-500">
-            ❤
-          </button>
-          <button className="text-xs border border-red-400 text-red-400 px-3 py-1 rounded-full hover:bg-red-400 hover:text-white transition">
-            ADD TO CART
-          </button>
-        </div>
+                  <p className="text-gray-500">
+                    Talla: {sale.talla}
+                  </p>
+
+                  <p className="text-sm">
+                    <span className="font-semibold ml-1">
+                      {sale.porcentajeDescuento > 0
+                        ? `Con descuento ${sale.porcentajeDescuento}%`
+                        : ""}
+                    </span>
+                  </p>
+
+                  <span
+                    className={`inline-block mt-2 rounded-full px-3 py-1 text-xs font-semibold ${
+                      sale.active
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {sale.active ? "Activa" : "Inactiva"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <img src={sale.producto.images[0]} className="w-[100px] h-[100px]" alt=""/>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
-  )
+  );
 }

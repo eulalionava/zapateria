@@ -15,6 +15,7 @@ export { getProductosBySize } from './product/get-product-by-size'
 export { getColectionSizes } from './sizes/get-collect-sizes'
 
 export { createSeleProduct } from './venta/sale-product'
+export { getSales } from './venta/get-sales'
 
 export { getCardPointById } from './cardpoint/get-cardpoint_by_id'
 export { addPointsToCardPoint } from './cardpoint/add_points'
