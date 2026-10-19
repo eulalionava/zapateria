@@ -20,6 +20,7 @@ export default function VentaPage(){
   const [searchingProduct, setSearchingProduct] = useState(false);
   const [productFind,setProductFind] = useState(false)
   const [product,setProduct] = useState<GetProduct>()
+  const [selectedImage, setSelectedImage] = useState('')
   const [ collectionSizes,setCollectionSizes ] = useState<Size[]>([]);
   const [ selectSize,setSelectSize ] = useState('');
   const [ activeDiscount,setActiveDiscount ] = useState<boolean>(false);
@@ -37,6 +38,7 @@ export default function VentaPage(){
       setCollectionSizes(getSizes)
    
       setProduct(response)
+      setSelectedImage(response.images[0])
       setProductFind(true)
       reset()
     } finally {
@@ -156,7 +158,7 @@ export default function VentaPage(){
                 <div className="flex flex-col items-center">
                   <div className="bg-gray-100 rounded-2xl p-4">
                     <img
-                      src={`${product?.images[0]}`}
+                      src={selectedImage || `${product?.images[0]}`}
                       alt="Product"
                       className="w-full max-w-sm object-contain"
                     />
@@ -164,13 +166,17 @@ export default function VentaPage(){
 
                   {/* Thumbnails */}
                   <div className="flex gap-3 mt-4">
-                    {product?.images.map((image, i) => (
-                      <div
-                        key={i}
-                        className="w-16 h-16 bg-gray-100 rounded-xl border-2 border-transparent hover:border-blue-500 cursor-pointer"
+                    {product?.images.map((image) => (
+                      <button
+                        key={`${image}`}
+                        className={`w-16 h-16 bg-gray-100 rounded-xl border-2 cursor-pointer ${
+                          selectedImage === image ? 'border-blue-500' : 'border-transparent hover:border-blue-500'
+                        }`}
+                        onClick={() => setSelectedImage(image)}
+                        type="button"
                       >
                         <img src={`${image}`} alt="Thumbnail" className="w-full h-full object-cover rounded-xl" />
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
