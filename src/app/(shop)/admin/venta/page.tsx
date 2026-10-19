@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2'
+import { motion } from 'motion/react';
 import { SpinnerLoading } from "@/src/components/SpinnerLoading";
 import { ModalAddCardPont } from "@/src/modals/ModalAddCardPoint";
 
@@ -20,7 +21,7 @@ export default function VentaPage(){
   const [searchingProduct, setSearchingProduct] = useState(false);
   const [productFind,setProductFind] = useState(false)
   const [product,setProduct] = useState<GetProduct>()
-  const [selectedImage, setSelectedImage] = useState('')
+  const [selectedImage, setSelectedImage] = useState<any>()
   const [ collectionSizes,setCollectionSizes ] = useState<Size[]>([]);
   const [ selectSize,setSelectSize ] = useState('');
   const [ activeDiscount,setActiveDiscount ] = useState<boolean>(false);
@@ -157,10 +158,14 @@ export default function VentaPage(){
                 {/* Imagen */}
                 <div className="flex flex-col items-center">
                   <div className="bg-gray-100 rounded-2xl p-4">
-                    <img
+                    <motion.img
+                      key={selectedImage || product?.images[0]}
                       src={selectedImage || `${product?.images[0]}`}
                       alt="Product"
                       className="w-full max-w-sm object-contain"
+                      initial={{ opacity: 0, x: 16, scale: 0.97 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      transition={{ duration: 0.28, ease: 'easeOut' }}
                     />
                   </div>
 
