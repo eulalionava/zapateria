@@ -53,7 +53,7 @@ export default async function VentasPage() {
                     </p>
 
                     <p className="text-sm">
-                      <span className="font-semibold ml-1">
+                      <span className="font-semibold text-[10px] ml-1">
                         {sale.porcentajeDescuento > 0
                           ? `Con descuento ${sale.porcentajeDescuento}%`
                           : ""}
@@ -103,7 +103,7 @@ export default async function VentasPage() {
           </p>
         </div>
       )}
-      
+
     </div>
   );
 }
